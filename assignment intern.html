@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Webpage</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        /* Fixed Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #333;
+            color: white;
+            padding: 1em;
+            text-align: center;
+            z-index: 1;
+        }
+
+        /* Page Content */
+        .content {
+            display: flex;
+            flex: 1;
+            margin-top: 60px; /* Leave space for navbar */
+        }
+
+        .menu {
+            background: #444;
+            color: white;
+            padding: 1em;
+            width: 20%;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+        }
+
+        .menu.collapsed {
+            width: 0;
+            padding: 0;
+        }
+
+        .main {
+            flex: 1;
+            padding: 1em;
+            background-color: #f4f4f4;
+        }
+
+        .right-panel {
+            background: #ddd;
+            color: black;
+            padding: 1em;
+            width: 20%;
+        }
+
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
+
+        /* Collapsible button styles */
+        .toggle-btn {
+            position: fixed;
+            top: 70px;
+            left: 10px;
+            background: #333;
+            color: white;
+            border: none;
+            padding: 0.5em 1em;
+            cursor: pointer;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">Fixed Navbar</div>
+
+    <!-- Collapsible Button -->
+    <button class="toggle-btn" onclick="toggleMenu()">Toggle Menu</button>
+
+    <!-- Content -->
+    <div class="content">
+        <div class="menu">Left Menu</div>
+        <div class="main">Main Content Area</div>
+        <div class="right-panel">Right Panel</div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">Footer Content</div>
+
+    <script>
+        // Function to toggle the collapsible menu
+        function toggleMenu() {
+            const menu = document.querySelector('.menu');
+            menu.classList.toggle('collapsed');
+        }
+
+        // Function to resize the page based on screen width
+        function resizePage() {
+            const width = window.innerWidth;
+            const body = document.body;
+
+            if (width >= 992 && width <= 1600) {
+                body.style.transform = 'scale(0.9)';
+            } else if (width >= 700 && width <= 767) {
+                body.style.transform = 'scale(0.8)';
+            } else if (width >= 600 && width < 700) {
+                body.style.transform = 'scale(0.75)';
+            } else if (width <= 600) {
+                body.style.transform = 'scale(0.5)';
+            } else {
+                body.style.transform = 'scale(1)';
+            }
+        }
+
+        // Attach the resizePage function to the resize event
+        window.addEventListener('resize', resizePage);
+        resizePage(); // Initial call on page load
+    </script>
+</body>
+</html>
